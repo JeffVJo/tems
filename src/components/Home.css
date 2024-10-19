@@ -1,0 +1,32 @@
+.home-container {
+  display: flex; /* Use flexbox for centering */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Darken the background for contrast */
+}
+
+.home-title {
+  font-size: 2.5rem; /* Adjust font size as needed */
+  white-space: nowrap; /* Prevent line break */
+  overflow: hidden; /* Prevent overflow if text is too long */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+  text-align: center; /* Center align the text */
+  color: #fff; /* Set text color to white */
+  font-family: 'Outfit', sans-serif; /* Apply the Outfit font */
+}
+
+.home-button {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem; /* Space above the button */
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.home-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
