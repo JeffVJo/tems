@@ -33,17 +33,43 @@ const DriverRegistration = () => {
     }
   };
 
-  const handleSave = () => {
-    // Implement the save logic, such as making an API call.
+  const handleSave = async () => {
     if (formData.licenseNo && formData.firstName && formData.lastName) {
-      console.log('Driver Data:', formData);
+      const formDataCopy = { ...formData };
+  
+      if (formData.photo) {
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+          formDataCopy.photo = reader.result; 
+  
+          try {
+            const response = await fetch('http://localhost:5000/driver-registration', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(formDataCopy),
+            });
+  
+            const data = await response.json();
+            if (response.ok) {
+              alert('Driver registered successfully!');
+              handleCancel(); 
+            } else {
+              alert(data.message || 'Failed to register driver');
+            }
+          } catch (err) {
+            console.error('Error submitting form:', err);
+          }
+        };
+        reader.readAsDataURL(formData.photo);
+      } else {
+        alert('Please upload a valid photo.');
+      }
     } else {
       alert('Please fill in all required fields.');
     }
   };
 
   const handleCancel = () => {
-    // Reset the form data to its initial state
     setFormData({
       licenseNo: '',
       lastName: '',
