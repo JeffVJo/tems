@@ -1,31 +1,32 @@
 // src/DriversList.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './DriversList.css';
+
 const DriversList = () => {
   const [drivers, setDrivers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage] = useState(10); // Keep this constant for now
-
-  // Sample data for demonstration
-  const sampleData = [
-    { id: 1, licenseId: 'GBN-10140715', name: 'Blake, Claire C', licenseType: 'Non-Professional' },
-    { id: 2, licenseId: 'CDM-062314', name: 'Smith, Johnny D', licenseType: 'Professional' },
-    // Add more sample data as needed
-  ];
+  const [entriesPerPage] = useState(10); 
 
   useEffect(() => {
-    // Simulate fetching data
-    setDrivers(sampleData);
+    const fetchDrivers = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/drivers'); 
+        setDrivers(response.data);
+      } catch (error) {
+        console.error('Error fetching driver data:', error);
+      }
+    };
+
+    fetchDrivers();
   }, []);
 
-  // Filtering drivers based on search term
   const filteredDrivers = drivers.filter(driver =>
     driver.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Calculate pagination
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
   const currentEntries = filteredDrivers.slice(indexOfFirstEntry, indexOfLastEntry);
@@ -40,9 +41,8 @@ const DriversList = () => {
           <select
             id="entries"
             className="border rounded p-1"
-            value={entriesPerPage} // This is kept constant, change logic if needed
+            value={entriesPerPage} 
             onChange={(e) => {
-              // If you want to allow changing entries per page, define a state for it
               console.log("Change entries per page: ", e.target.value);
             }}
           >
@@ -53,7 +53,7 @@ const DriversList = () => {
           <span className="ml-2">entries</span>
         </div>
         <div>
-          <Link to="/drivers/new" className="bg-blue-500 text-white rounded px-4 py-2">
+          <Link to="/new" className="bg-blue-500 text-white rounded px-4 py-2">
             + Create New
           </Link>
         </div>

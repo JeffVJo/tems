@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const OffenseRecord = require('./models/OffenseRecord'); // Import offense record model
+const OffenseRecord = require('./models/OffenseRecord'); 
+const DriverList = require('./models/DriverList'); 
 const app = express();
 const port = 5000;
 
@@ -95,6 +96,45 @@ app.get('/offense-records', async (req, res) => {
   }
 });
 
+app.post('/driver-registration', async (req, res) => {
+  try {
+    const { licenseNo, lastName, firstName, middleName, dob, presentAddress, permanentAddress, civilStatus, nationality, contactNumber, licenseType, photo } = req.body;
+
+    // Create a new driver object
+    const newDriver = new DriverList({
+      licenseNo,
+      lastName,
+      firstName,
+      middleName,
+      dob,
+      presentAddress,
+      permanentAddress,
+      civilStatus,
+      nationality,
+      contactNumber,
+      licenseType,
+      photo,
+    });
+
+    // Save the driver to the database
+    await newDriver.save();
+    res.status(201).json({ message: 'Driver registered successfully!' });
+  } catch (err) {
+    console.error('Error registering driver:', err);
+    res.status(500).json({ message: 'Failed to register driver', error: err });
+  }
+});
+
+
+app.get('/drivers', async (req, res) => {
+  try {
+    const drivers = await DriverList.find(); // Fetch all drivers from the database
+    res.status(200).json(drivers); // Send the driver data as JSON
+  } catch (err) {
+    console.error('Error fetching drivers:', err);
+    res.status(500).json({ message: 'Failed to fetch drivers', error: err.message });
+  }
+});
 // Start Server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
