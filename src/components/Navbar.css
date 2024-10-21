@@ -1,81 +1,57 @@
-/* src/components/Navbar.css */
-
+/* Navbar styling */
 .navbar {
-    background-color: #3b82f6; /* Blue background */
-    position: relative; /* Allows dropdown to position correctly */
-    z-index: 10; /* Ensures navbar is above other content */
-  }
-  
-  .navbar-button {
-    color: white;
-    cursor: pointer;
-    background: none;
-    border: none;
-  }
-  
-  .navbar-title {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .dropdown-menu {
-    position: absolute; /* Positioning for dropdown */
-    right: 0;
-    background-color: white; /* White background for dropdown */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for dropdown */
-    border-radius: 4px; /* Slight rounding of corners */
-    z-index: 20; /* Above other content */
-  }
-  
-  .dropdown-item {
-    padding: 10px 15px; /* Padding for dropdown items */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f1f5f9; /* Light gray on hover */
-  }
-  
-  .card {
-    background-color: white;
-    shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for cards */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px;
-    margin: 10px;
-    flex: 1; /* Allow cards to grow */
-    display: flex;
-    align-items: center;
-  }
-  
-  .card-icon {
-    width: 50px;
-    height: 50px;
-    color: #3b82f6; /* Blue icon color */
-  }
-  
-  .card-title {
-    font-size: 1.2rem; /* Title font size */
-    font-weight: bold;
-  }
-  
-  .card-description {
-    margin-top: 5px; /* Space above description */
-    color: #6b7280; /* Gray text color */
-  }
-  
-  /* Ensure full height on all pages */
-  html, body {
-    height: 100%;
-    margin: 0;
-    font-family: 'Arial', sans-serif; /* Default font */
-  }
-  
-  .App {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure full height */
-  }
-  
+  background-color: #3b82f6; /* Navbar color */
+  position: relative;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px; /* Set the width of the sidebar */
+  background-color: #3b82f6; /* Background color for the sidebar */
+  transition: transform 0.3s ease; /* Sliding effect */
+  transform: translateX(-100%); /* Start hidden to the left */
+  z-index: 1000; /* Ensure sidebar is above other content */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Slide in when open */
+}
+
+/* Link styling */
+.nav-link {
+  display: block;
+  padding: 10px;
+  color: white; /* Link text color */
+  text-decoration: none; /* Remove underline */
+  transition: background 0.2s; /* Transition for hover effect */
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Change color on hover */
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  top: 60px; /* Adjust according to your layout */
+  right: 0;
+  background-color: white;
+  color: black; /* Text color for dropdown */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+/* Dropdown item styling */
+.dropdown-item {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Change color on hover */
+}

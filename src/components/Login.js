@@ -13,17 +13,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
       const response = await axios.post('http://localhost:5000/signin', {
-        username: email, // Should match the backend
-        password: password, // Should match the backend
+        username: email,
+        password: password,
       });
-  
+
       if (response.data.message === 'Login successful!') {
         navigate('/mainpage');
       } else {
-        setError(response.data.message); // Handle invalid credentials
+        setError(response.data.message);
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -32,9 +31,15 @@ const Login = () => {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${loginImage})` }}
     >
+      {/* Title */}
+      <h1 className="text-4xl font-extrabold text-white mb-8">
+        TRAFFIC ENFORCEMENT MANAGEMENT SYSTEM
+      </h1>
+
+      {/* Login Card */}
       <div className="w-full max-w-md p-8 space-y-6 bg-white bg-opacity-90 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
@@ -58,7 +63,7 @@ const Login = () => {
               />
             </div>
           </div>
-          <div>
+          <div className="mt-4">
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
             </label>
@@ -79,13 +84,16 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-1 mt-4 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="w-full py-2 mt-4 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           >
             Login
           </button>
         </form>
         <p className="mt-4 text-sm text-center text-gray-600">
-          Don't have an account? <a href="/signup" className="text-blue-600 hover:underline">Sign up</a>
+          Don't have an account?{' '}
+          <a href="/signup" className="text-blue-600 hover:underline">
+            Sign up
+          </a>
         </p>
       </div>
     </div>

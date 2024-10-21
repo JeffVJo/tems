@@ -33,31 +33,29 @@ const Navbar = () => {
         </div>
       </div>
 
-      {isOpen && (
-        <div className="flex flex-col mt-4 bg-blue-600 text-black shadow-lg h-screen p-2 w-40">
-          <Link to="/dashboard" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            Dashboard
-          </Link>
-          <Link to="/offense-records" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            Offense Records
-          </Link>
-          <Link to="/drivers-list" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            Drivers List
-          </Link>
-          <Link to="/reports" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            Reports
-          </Link>
-          <Link to="/offense-list" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            Offense List
-          </Link>
-          <Link to="/user-list" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            User List
-          </Link>
-          <Link to="/settings" className="p-2 hover:bg-gray-200 rounded-md transition-colors duration-200 cursor-pointer">
-            Settings
-          </Link>
-        </div>
-      )}
+      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+        <Link to="/dashboard" className="nav-link">
+          Dashboard
+        </Link>
+        <Link to="/offense-records" className="nav-link">
+          Offense Records
+        </Link>
+        <Link to="/drivers-list" className="nav-link">
+          Drivers List
+        </Link>
+        <Link to="/reports" className="nav-link">
+          Reports
+        </Link>
+        <Link to="/offense-list" className="nav-link">
+          Offense List
+        </Link>
+        <Link to="/user-list" className="nav-link">
+          User List
+        </Link>
+        <Link to="/settings" className="nav-link">
+          Settings
+        </Link>
+      </div>
 
       {dropdownOpen && (
         <div className="dropdown-menu">

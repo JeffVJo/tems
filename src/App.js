@@ -16,7 +16,7 @@ import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
 import CreateOffenseRecord from './components/CreateOffenseRecord';
 import DriverRegistration from './components/DriverRegistration';
-
+import Home2 from './components/Home2';
 const App = () => {
   const location = useLocation(); // Get the current location
 
@@ -44,6 +44,7 @@ const App = () => {
         <Route path="/create-user" element={<CreateUser/>} />
         <Route path="/create-offenserecord" element={<CreateOffenseRecord/>} />
         <Route path="/new" element={<DriverRegistration/>} />
+        <Route path="/home" element={<Home2 />} />
       </Routes>
     </>
   );

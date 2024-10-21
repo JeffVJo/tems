@@ -1,0 +1,55 @@
+/* Full-page layout with white background */
+.home-container {
+    height: 100vh;
+    background-color: white; /* Changed to white */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the top */
+    color: #333; /* Darker text color for better readability */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    padding-top: 20px; /* Add padding to give space from top */
+  }
+  
+  /* Title Styling */
+  .top-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 20px; /* Space below the title */
+  }
+  
+  /* Date and Time Section */
+  .datetime-container {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+  }
+  
+  /* Calendar and Clock Styling */
+  .calendar, .clock {
+    background-color: rgba(0, 0, 0, 0.1); /* Lighter background for calendar and clock */
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  }
+  
+  .calendar h2, .clock h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .datetime-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .calendar, .clock {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+  
