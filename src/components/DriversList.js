@@ -8,13 +8,16 @@ const DriversList = () => {
   const [drivers, setDrivers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage, setEntriesPerPage] = useState(10); // Now we use this state to control entries per page
+  const [entriesPerPage, setEntriesPerPage] = useState(10);
 
   useEffect(() => {
     const fetchDrivers = async () => {
       try {
         const response = await axios.get('http://localhost:5000/drivers');
+        console.log('API Response:', response.data); 
         setDrivers(response.data);
+        console.log('Driver Data:', drivers);
+
       } catch (error) {
         console.error('Error fetching driver data:', error);
       }
@@ -23,14 +26,17 @@ const DriversList = () => {
     fetchDrivers();
   }, []);
 
-  // Safety check for undefined 'name'
   const filteredDrivers = drivers.filter(driver =>
-    driver.name ? driver.name.toLowerCase().includes(searchTerm.toLowerCase()) : false
+    driver.name ? driver.name.toLowerCase().includes(searchTerm.toLowerCase()) : true
   );
+  
+  console.log('Filtered Drivers:', filteredDrivers); 
 
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
   const currentEntries = filteredDrivers.slice(indexOfFirstEntry, indexOfLastEntry);
+  console.log('Current Entries:', currentEntries); 
+  
   const totalPages = Math.ceil(filteredDrivers.length / entriesPerPage);
 
   return (
@@ -44,7 +50,7 @@ const DriversList = () => {
             id="entries"
             className="border rounded p-1"
             value={entriesPerPage}
-            onChange={(e) => setEntriesPerPage(Number(e.target.value))} // Adjust entries per page based on the selection
+            onChange={(e) => setEntriesPerPage(Number(e.target.value))}
           >
             <option value={10}>10</option>
             <option value={25}>25</option>
@@ -78,19 +84,25 @@ const DriversList = () => {
           </tr>
         </thead>
         <tbody>
-          {currentEntries.map((driver, index) => (
-            <tr key={driver.id}>
-              <td className="border p-2">{indexOfFirstEntry + index + 1}</td>
-              <td className="border p-2">{driver.licenseId}</td>
-              <td className="border p-2">{driver.name || 'N/A'}</td> {/* Default to 'N/A' if no name */}
-              <td className="border p-2">{driver.licenseType || 'N/A'}</td> {/* Handle missing license type */}
-              <td className="border p-2">
-                <button className="bg-blue-500 text-white rounded px-2 py-1">View</button>
-                <button className="bg-yellow-500 text-white rounded px-2 py-1 ml-2">Edit</button>
-                <button className="bg-red-500 text-white rounded px-2 py-1 ml-2">Delete</button>
-              </td>
+          {currentEntries.length > 0 ? (
+            currentEntries.map((driver, index) => (
+              <tr key={driver._id}>
+                <td className="border p-2">{indexOfFirstEntry + index + 1}</td>
+                <td className="border p-2">{driver.licenseNo || 'N/A'}</td>
+                <td className="border p-2">{`${driver.firstName || ''} ${driver.middleName || ''} ${driver.lastName || ''}`.trim() || 'N/A'}</td>
+                <td className="border p-2">{driver.licenseType || 'N/A'}</td>
+                <td className="border p-2">
+                  <button className="bg-blue-500 text-white rounded px-2 py-1">View</button>
+                  <button className="bg-yellow-500 text-white rounded px-2 py-1 ml-2">Edit</button>
+                  <button className="bg-red-500 text-white rounded px-2 py-1 ml-2">Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5" className="text-center p-4">No drivers found.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 

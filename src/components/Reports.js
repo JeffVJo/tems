@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import Axios
 import './Reports.css'; // Import your custom styles
 
 const Reports = () => {
@@ -11,9 +12,8 @@ const Reports = () => {
     const fetchReports = async () => {
         setLoading(true);
         try {
-            const response = await fetch('/api/reports'); // Adjust the API endpoint as needed
-            const data = await response.json();
-            setReports(data);
+            const response = await axios.get('http://localhost:5000/reports'); // Adjust the API endpoint as needed
+            setReports(response.data);
         } catch (error) {
             console.error('Error fetching reports:', error);
         } finally {
@@ -71,7 +71,7 @@ const Reports = () => {
                             <th>#</th>
                             <th>Date</th>
                             <th>Ticket No.</th>
-                            <th>License ID</th>
+                            <th>Officer ID</th>
                             <th>Officer</th>
                             <th>Status</th>
                             <th>Total Fine</th>
@@ -81,10 +81,10 @@ const Reports = () => {
                         {reports.map((report, index) => (
                             <tr key={report.ticketNo}>
                                 <td>{index + 1}</td>
-                                <td>{new Date(report.dateTime).toLocaleDateString()}</td>
+                                <td>{new Date(report.dateViolated).toLocaleDateString()}</td>
                                 <td>{report.ticketNo}</td>
-                                <td>{report.licenseId}</td>
-                                <td>{report.officer}</td>
+                                <td>{report.officerID}</td>
+                                <td>{report.officerName}</td>
                                 <td>{report.status}</td>
                                 <td>{report.totalFine}</td>
                             </tr>
