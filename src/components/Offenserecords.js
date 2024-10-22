@@ -56,13 +56,13 @@ const OffenseRecord = () => {
         <tbody>
           {offenses.map((offense) => (
             <tr key={offense._id}>
-              <td className="border px-4 py-2">{offense.driverName}</td>
+              <td className="border px-4 py-2">{offense.driver}</td>
               <td className="border px-4 py-2">{offense.officerName}</td>
-              <td className="border px-4 py-2">{offense.officerId}</td>
-              <td className="border px-4 py-2">{offense.ticketNumber}</td>
+              <td className="border px-4 py-2">{offense.officerID}</td>
+              <td className="border px-4 py-2">{offense.ticketNo}</td>
               <td className="border px-4 py-2">{offense.status}</td>
-              <td className="border px-4 py-2">{new Date(offense.date).toLocaleDateString()}</td>
-              <td className="border px-4 py-2">{offense.fineAmount}</td>
+              <td className="border px-4 py-2">{new Date(offense.dateViolated).toLocaleDateString()}</td>
+              <td className="border px-4 py-2">{offense.totalFine}</td>
               <td className="border px-4 py-2">
                 <button
                   className="bg-yellow-500 text-white py-1 px-3 rounded mr-2"

@@ -76,6 +76,8 @@ app.post('/signin', async (req, res) => {
 // POST: Create a new offense record
 app.post('/offense-record', async (req, res) => {
   try {
+    console.log('Request Body:', req.body); // Log incoming data
+
     const offenseRecord = new OffenseRecord(req.body);
     await offenseRecord.save();
     res.status(201).json({ message: 'Offense record created successfully!' });
@@ -140,6 +142,16 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
+
+app.get('/reports', async (req, res) => {
+  try {
+      const records = await OffenseRecord.find();
+      res.json(records);
+  } catch (error) {
+      console.error('Error fetching records:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // const express = require('express');
 // const cors = require('cors');
